@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>
+  Редактировать задачу
+</h2>
+
+<form class="form-group" #formTask="ngForm" novalidate>
+  <h6 class="mat-subheading-1">Заголовок Задачи</h6>
+  <mat-input-container class="fullSizeField">
+    <input matInput type="text" class="form-control" name="title" [(ngModel)]="model.title"
+           #title='ngModel'>
+  </mat-input-container>
+  <h6 class="mat-subheading-1">Описание Задачи</h6>
+  <mat-form-field class="fullSizeField">
+    <textarea matInput type="text" name="description"
+              [(ngModel)]="model.description" matTextareaAutosize matAutosizeMinRows="2"
+              matAutosizeMaxRows="8"
+              #description='ngModel'>
+    </textarea>
+  </mat-form-field>
+  <h6 class="mat-subheading-1">Дедлайн задачи</h6>
+  <mat-form-field class="">
+    <input matInput [(ngModel)]="model.deadline" name="deadline" [matDatepicker]="picker" placeholder="Выберите дату">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <app-time-input [time]="model.deadline"></app-time-input>
+  <div mat-dialog-actions class="actionsDialog ">
+    <div class="actionsDialog">
+      <button mat-button cdkFocusInitial (click)="onNoClick()">Назад</button>
+      <button mat-raised-button routerLinkActive="active" [disabled]="!formTask.valid" [mat-dialog-close]="model"
+              color="primary">send
+      </button>
+    </div>
+  </div>
+</form>
+
+

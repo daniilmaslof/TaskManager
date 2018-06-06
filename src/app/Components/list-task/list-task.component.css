@@ -1,0 +1,39 @@
+:host {
+  margin: auto;
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+}
+
+mat-toolbar {
+  justify-content: space-between;
+}
+
+.title {
+  margin-left: -40px;
+}
+
+main {
+  padding: 10px;
+}
+
+app-task {
+  display: block;
+  width: calc(100% - 30px);
+  margin: 0 auto 10px auto;
+  border-radius: 2px;
+  background: #fafafa;
+  padding: 18px;
+}
+
+.loadingSpinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - 144px)
+}
+
+app-task.dragging {
+  outline: 5px dashed #b8c8d6;
+}

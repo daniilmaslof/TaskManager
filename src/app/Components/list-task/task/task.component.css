@@ -1,0 +1,33 @@
+
+.titleTask {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  flex: 1;
+  word-wrap: break-word;
+}
+
+.buttonEdit {
+  margin-right: 10px;
+}
+
+.deadlineTask {
+  text-align: right;
+}
+
+.actionsCard {
+  display: flex;
+  justify-content: space-between
+}
+
+.cardDescription {
+  text-align: center;
+  word-wrap: break-word;
+  margin: 10px 0px;
+  margin-left: 50px;
+}
+
+.headerTask {
+  display: flex;
+}
