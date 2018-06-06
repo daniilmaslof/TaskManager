@@ -11,12 +11,6 @@ export class StoreTaskService extends Store<Task[]> {
     this.downloadTasks();
   }
 
-  // let date = new Date('Sat June 24 2018 18:13:28 GMT+0500 (RTZ 4 (зима))');
-  // let tasks = [];
-  // for (let i = 0; i < 5; i++) {
-  //   tasks.push(new Task(i.toString(), 'i', date));
-  // }
-
   addTask(task: Task): void {
     this.state.unshift(task);
     this.setState(this.state);
