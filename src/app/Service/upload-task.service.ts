@@ -14,6 +14,7 @@ export class UploadTaskService {
     let taskToString = tasks.map(
       (task) => {
         return {
+          id: task.id,
           title: task.title,
           description: task.description,
           deadline: task.deadline.toString()
@@ -34,9 +35,8 @@ export class UploadTaskService {
         value.map(
           (task) => {
             task.deadline = new Date(task.deadline);
-            return new Task(task.title, task.description, new Date(task.deadline));
+            return new Task(task.id, task.title, task.description, new Date(task.deadline));
           });
-        console.log(value);
         return value;
       }
     );

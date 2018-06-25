@@ -7,18 +7,18 @@
       {{task.title}}
     </div>
   </div>
-  <div *ngIf="cardOpen" class="mat-body-1 cardDescription">
+  <div *ngIf="task.taskDescriptionShow" class="mat-body-1 cardDescription">
     {{task.description}}
   </div>
   <div class="deadlineTask mat-caption">
     дедлайн задачи: {{task.deadline | date: 'dd.MM.yyyy'}}
-    в {{task.deadline | date: 'hh:mm'}}
+    в {{task.deadline | date: 'HH:mm'}}
   </div>
   <div class="actionsCard">
     <button mat-mini-fab color="accent" (click)="openDialog()" class="buttonEdit">
       <mat-icon>edit</mat-icon>
     </button>
-    <button mat-raised-button color="primary" (click)="clickTask()">{{nameButton[cardOpen ? 1: 0]}}</button>
+    <button mat-raised-button color="primary" (click)="clickTask()">{{nameButton[task.taskDescriptionShow ? 1: 0]}}</button>
   </div>
 </div>
 

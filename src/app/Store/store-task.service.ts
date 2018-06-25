@@ -48,7 +48,6 @@ export class StoreTaskService extends Store<Task[]> {
 
   editTask(task: Task, index: number) {
     this.state[index] = task;
-    console.log(this.state[index]);
     this.setState(this.state);
   }
 

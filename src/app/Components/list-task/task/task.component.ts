@@ -3,6 +3,7 @@ import {Task} from "../../../Models/Task";
 import {MatDialog, MatDialogConfig} from "@angular/material";
 import {EditTaskComponent} from "./edit-task/edit-task.component";
 import index from "@angular/cli/lib/cli";
+import {DropSortableEvent} from "../../../Directives/drag-sortable.directive";
 
 export interface EditTaskEvent {
   task: Task;
@@ -19,14 +20,13 @@ export class TaskComponent implements OnInit {
   @Input() index: number;
   @Output() deleteTask: EventEmitter<number> = new EventEmitter();
   @Output() editTask: EventEmitter<EditTaskEvent> = new EventEmitter();
-  cardOpen = false;
   nameButton = ['Посмотреть', 'Закрыть'];
 
   constructor(public dialog: MatDialog) {
   }
 
   clickTask() {
-    this.cardOpen = !this.cardOpen;
+    this.task.taskDescriptionShow = !this.task.taskDescriptionShow;
   }
 
   delete() {
@@ -40,15 +40,16 @@ export class TaskComponent implements OnInit {
     } as MatDialogConfig<any>);
     dialogRef.afterClosed().subscribe(task => {
       if (task) {
-        console.log(task);
         this.editTask.emit({task: task, index: this.index});
       }
     });
+
+    dialogRef.beforeClose().subscribe(
+      task => console.log(task)
+  );
   }
 
-
   ngOnInit() {
-
   }
 
 }

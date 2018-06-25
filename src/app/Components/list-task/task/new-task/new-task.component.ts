@@ -1,7 +1,8 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {Task} from "../../../../Models/Task";
-import {FormGroup} from "@angular/forms";
-import {MatDialog, MatDialogRef} from "@angular/material";
+import {FormGroup, NgForm} from "@angular/forms";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material";
+import {TaskFormGroup} from "../../../../Models/TaskFormGroup";
 
 @Component({
   selector: 'app-new-task',
@@ -9,20 +10,19 @@ import {MatDialog, MatDialogRef} from "@angular/material";
   styleUrls: ['./new-task.component.css']
 })
 export class NewTaskComponent implements OnInit {
-
-  @ViewChild('formTask') formTask: FormGroup;
   model: Task;
-
-  constructor(public dialogRef: MatDialogRef<NewTaskComponent>, private dialog: MatDialog) {
-    this.model = new Task();
+  form: TaskFormGroup = new TaskFormGroup();
+  formSubmitted = false;
+  constructor(public dialogRef: MatDialogRef<NewTaskComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: number, private dialog: MatDialog) {
+    this.model = new Task(data);
   }
 
   onNoClick() {
     this.dialogRef.close();
   }
-
-  onSubmit() {
-
+  submitForm(form: NgForm) {
+    this.formSubmitted = true;
   }
 
   ngOnInit() {

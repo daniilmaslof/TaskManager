@@ -2,14 +2,17 @@
   Редактировать задачу
 </h2>
 <mat-dialog-content>
-  <form class="newTaskForm" #formTask="ngForm" novalidate>
+  <form class="newTaskForm" [formGroup]="form" (ngSubmit)="submitForm(form)" novalidate>
     <mat-horizontal-stepper class="StepperContent">
       <mat-step>
         <ng-template matStepLabel> Заголовок</ng-template>
         <mat-input-container class="fullPage">
           <input matInput placeholder="Заголовок Задачи" required type="text" class="form-control" name="title"
                  [(ngModel)]="model.title"
-                 #title='ngModel'>
+                 formControlName="title">
+          <mat-error *ngFor="let error of form.controls['title'].getValidationMessages()">{{
+            error}}
+          </mat-error>
         </mat-input-container>
         <div>
           <button mat-raised-button class="miniMargin" color="primary" matStepperNext>Next</button>
@@ -22,8 +25,11 @@
     <textarea required matInput placeholder="Описание Задачи" type="text" name="description"
               [(ngModel)]="model.description" matTextareaAutosize matAutosizeMinRows="2"
               matAutosizeMaxRows="8"
-              #description='ngModel'>
+              formControlName="description">
     </textarea>
+          <mat-error *ngFor="let error of form.controls['description'].getValidationMessages()">{{
+            error}}
+          </mat-error>
         </mat-form-field>
         <div>
           <button mat-raised-button class="miniMargin" color="primary" matStepperPrevious>Back</button>
@@ -34,7 +40,9 @@
         <ng-template matStepLabel>Дедлайн</ng-template>
         <h6 class="mat-subheading-1">Дедлайн задачи</h6>
         <mat-form-field class="">
-          <input matInput required [(ngModel)]="model.deadline" name="deadline" [matDatepicker]="picker"
+          <input matInput required [(ngModel)]="model.deadline" name="deadline"
+                 formControlName="deadline"
+                 [matDatepicker]="picker"
                  placeholder="Выберите дату">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
@@ -51,9 +59,15 @@
         <div class="mat-subheading-2">
           Вы завершили создание задачи
         </div>
+        <mat-error *ngFor="let error of form.getFormValidationMessages()">
+          {{error}}
+        </mat-error>
         <button mat-button cdkFocusInitial (click)="onNoClick()">Назад</button>
-        <button mat-raised-button routerLinkActive="active" [disabled]="!formTask.valid" [mat-dialog-close]="model"
-                color="primary">send
+        <button
+          mat-raised-button routerLinkActive="active"
+          [disabled]="!formSubmitted && form.invalid "
+          type="submit" [mat-dialog-close]="model"
+          color="primary">send
         </button>
       </mat-step>
     </mat-horizontal-stepper>

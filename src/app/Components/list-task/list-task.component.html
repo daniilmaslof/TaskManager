@@ -1,23 +1,29 @@
+
 <mat-toolbar color="accent">
-  <button color="primary" mat-raised-button (click)="addTask()">Создать задачу</button>
+  <button color="primary" mat-raised-button (click)="addTask(tasks.length)">Создать задачу</button>
   <span class="title">Список задач</span>
   <button mat-raised-button color="primary" (click)="unloadTasks()" [disabled]="updateList">Сохранить Изменения</button>
 </mat-toolbar>
-<div class="loadingSpinner" *ngIf="loading">
-  <mat-progress-spinner diameter="150" mode="indeterminate" color="primary">
-  </mat-progress-spinner>
-</div>
+  <div class="loadingSpinner" *ngIf="loading">
+    <mat-progress-spinner diameter="150" mode="indeterminate" color="primary">
+    </mat-progress-spinner>
+  </div>
 <main *ngIf="!loading" class="mat-elevation-z2">
-  <app-task class="mat-elevation-z2" [task]="task" [index]="index" (editTask)="editTask($event)"
-            (deleteTask)="deleteTask($event)" *ngFor="let task of tasks;let index= index"
-            appHighlightTask
-            [deadlineTask]="task.deadline"
+  <div [@listAnimation]="tasks.length">
+  <app-task  class="task mat-elevation-z2"
+            [task]="task" [index]="index" (editTask)="editTask($event)"
+            (deleteTask)="deleteTask($event)"
+            *ngFor="let task of tasks;trackBy: trackById;let index= index"
             draggable="true"
             appDragSortable
             [item]="task"
             [itemIndex]="index"
+            [itemOpen]="task.taskDescriptionShow"
             [sortableElemetSelector]="'app-task'"
             (dropSortable)="onDropSortable($event)"
+            [ngClass]="getClassMap(task.deadline)"
   >
   </app-task>
+  </div>
 </main>
+

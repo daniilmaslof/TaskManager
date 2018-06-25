@@ -20,6 +20,8 @@
   display: flex;
   justify-content: space-between
 }
+.cardTask{
+}
 
 .cardDescription {
   text-align: center;

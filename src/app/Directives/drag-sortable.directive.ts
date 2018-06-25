@@ -19,6 +19,7 @@ export interface DropSortableEvent {
 export class DragSortableDirective {
   @Input() item;
   @Input() itemIndex: number;
+  @Input() itemOpen: any;
   @Input() sortableElemetSelector: string;
   @Output() dropSortable: EventEmitter<DropSortableEvent> = new EventEmitter();
 
@@ -47,7 +48,7 @@ export class DragSortableDirective {
         const dragElIndex = dragSource.index;
         const textNodeType = 3;
         const target = event.target.nodeType === textNodeType ?
-          event.target.parentNode :
+          event.target.closest(this.sortableElemetSelector) :
           event.target;
         const sortableEl = target.closest(this.sortableElemetSelector);
         if (dragEl !== sortableEl && dragEl.parentNode === sortableEl.parentNode) {
@@ -57,7 +58,7 @@ export class DragSortableDirective {
               index: dragElIndex - 1
             }));
           } else {
-            this.render.insertBefore(sortableEl.parentNode, dragEl, sortableEl.nextSibling)
+            this.render.insertBefore(sortableEl.parentNode, dragEl, sortableEl.nextSibling);
             this.dragService.dragSource$.next(Object.assign({}, dragSource, {
               index: dragElIndex + 1
             }));

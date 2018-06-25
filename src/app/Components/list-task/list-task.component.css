@@ -25,7 +25,15 @@ app-task {
   background: #fafafa;
   padding: 18px;
 }
-
+.dragging {
+  outline: 5px dashed #b8c8d6;
+}
+.bg-approach{
+  background: #ffcdd2;
+}
+.bg-exceeding{
+  background:#b71c1c;
+}
 .loadingSpinner {
   display: flex;
   justify-content: center;
@@ -34,6 +42,4 @@ app-task {
   height: calc(100vh - 144px)
 }
 
-app-task.dragging {
-  outline: 5px dashed #b8c8d6;
-}
+
